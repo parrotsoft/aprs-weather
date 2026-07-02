@@ -33,12 +33,27 @@ Copia `.env.example` a `.env` y completa los valores:
 uv run main.py
 ```
 
-El script consulta la temperatura actual via OpenWeatherMap y envía un paquete APRS con el formato:
+El script consulta el clima via OpenWeatherMap y envía:
+
+1. **Paquete de posición** con datos meteorológicos en formato APRS estándar:
 
 ```
-CALLSIGN>APRS:=LAT/LON>Ciudad 31°C
+CALLSIGN>APRS:=LAT/LON_DDD/SSSgTTTtTTTrRRRpPPPhDDBDDDDDComentario
 ```
 
-## Conexión
+| Código  | Significado                       | Ejemplo                  |
+|---------|-----------------------------------|--------------------------|
+| `DDD/`  | Dirección del viento              | `052/` → 52°             |
+| `SSS`   | Velocidad del viento (nudos)      | `011` → 11 nudos         |
+| `gTTT`  | Ráfagas (nudos)                   | `g019` → 19 nudos        |
+| `tTTT`  | Temperatura (°F)                   | `t081` → 27°C (81°F)     |
+| `rRRR`  | Lluvia última hora (centésimas in) | `r000` → 0.00 in         |
+| `pPPP`  | Lluvia desde media noche (cent. in) | `p000` → 0.00 in        |
+| `hDD`   | Humedad (%)                        | `h79` → 79%              |
+| `bDDDDD`| Presión (décimas de hPa)           | `b10060` → 1006.0 hPa    |
 
-- **Servidor**: `rotate.aprs2.net:14580`
+2. **Paquete de estado** con texto descriptivo (aparece en "Ultimo estado" en aprs.fi):
+
+```
+CALLSIGN>APRS:>Estacion meteorologica APRS - Ciudad
+```
