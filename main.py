@@ -30,7 +30,7 @@ def main():
 
     ais.connect()
 
-    packet = f"{CALLSIGN}>APRS:={LATITUDE}/{LONGITUDE}>{comment}"
+    packet = f"{CALLSIGN}>APRS:={LATITUDE}/{LONGITUDE}_{comment}"
 
     ais.sendall(packet)
 
