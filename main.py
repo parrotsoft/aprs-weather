@@ -3,6 +3,7 @@ logging.basicConfig(level=logging.DEBUG)
 import os
 import aprslib
 from dotenv import load_dotenv
+from weather import OpenWeatherMap
 
 load_dotenv()
 
@@ -10,10 +11,16 @@ CALLSIGN = os.getenv("CALLSIGN")
 PASSCODE = os.getenv("PASSCODE")
 LATITUDE = os.getenv("LATITUDE")
 LONGITUDE = os.getenv("LONGITUDE")
+CITY = os.getenv("CITY")
+COUNTRY = os.getenv("COUNTRY")
+OWM_API_KEY = os.getenv("OWM_API_KEY")
 
-comment = "Barranquilla 31°C"
 
 def main():
+    owm = OpenWeatherMap(OWM_API_KEY, CITY, COUNTRY) # type: ignore
+    temp = owm.get_temperature_celsius()
+    comment = f"{CITY} {temp:.0f}°C"
+
     ais = aprslib.IS(
         CALLSIGN,
         passwd=PASSCODE, # type: ignore
