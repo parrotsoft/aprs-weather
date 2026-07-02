@@ -1,6 +1,6 @@
 # aprs-weather
 
-Script mínimo en Python que envía un paquete de posición (baliza meteorológica) a APRS-IS y termina.
+Script mínimo en Python que envía un paquete de posición (baliza meteorológica) a APRS-IS.
 
 ## Requisitos
 
